@@ -17,7 +17,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { Collapse, ListItemButton } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -60,7 +60,7 @@ const Header = () => {
     setListOpen(!listOpen);
   };
   return (
-    <>
+    <div style={{ flex: open ? 1 : 0 }}>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -81,6 +81,7 @@ const Header = () => {
         sx={{
           width: drawerWidth,
           flexShrink: 0,
+          display: open ? 'block' : 'none',
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
@@ -107,13 +108,15 @@ const Header = () => {
           }}
           component="nav"
         >
-          <ListItemButton onClick={handleListClick}>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Home" />
-            {listOpen ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
+          <Link to="/">
+            <ListItemButton onClick={handleListClick}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+              {listOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+          </Link>
           <Collapse in={listOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton sx={{ pl: 4 }}>
@@ -124,21 +127,25 @@ const Header = () => {
               </ListItemButton>
             </List>
           </Collapse>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Login" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="About" />
-          </ListItemButton>
+          <Link to="/login">
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItemButton>
+          </Link>
+          <Link to="/about">
+            <ListItemButton>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="About" />
+            </ListItemButton>
+          </Link>
         </List>
       </Drawer>
-    </>
+    </div>
   );
 };
 
