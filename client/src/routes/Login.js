@@ -1,7 +1,75 @@
-import React from 'react';
+import styled from '@emotion/styled';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  TextField,
+} from '@mui/material';
+import React, { useState } from 'react';
+
+const Container = styled.div`
+  flex: 6;
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
 
 const Login = () => {
-  return <div>Login</div>;
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+  const { email, password } = inputs;
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    setInputs({ email: '', password: '' });
+  };
+  return (
+    <Container>
+      <Box component="form" onSubmit={onSubmit}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoFocus
+          onChange={onChange}
+        />
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          onChange={onChange}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Sign In
+        </Button>
+      </Box>
+    </Container>
+  );
 };
 
 export default Login;
