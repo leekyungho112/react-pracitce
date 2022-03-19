@@ -21,10 +21,10 @@ const Container = styled.div`
 
 const Login = () => {
   const [inputs, setInputs] = useState({
-    email: '',
+    username: '',
     password: '',
   });
-  const { email, password } = inputs;
+  const { username, password } = inputs;
   const onChange = (e) => {
     const { value, name } = e.target;
     setInputs({
@@ -34,7 +34,7 @@ const Login = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    setInputs({ email: '', password: '' });
+    setInputs({ username: '', password: '' });
   };
   return (
     <Container>
@@ -43,9 +43,9 @@ const Login = () => {
           margin="normal"
           required
           fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
+          id="username"
+          label="username"
+          name="username"
           autoFocus
           onChange={onChange}
         />
